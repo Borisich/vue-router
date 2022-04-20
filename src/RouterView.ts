@@ -73,14 +73,14 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
     provide(routerViewLocationKey, routeToDisplay)
 
     const viewRef = ref<ComponentPublicInstance>()
-    const noRender = ref(false)
+    let noRender = false
 
     onBeforeRouteLeave(() => {
-      noRender.value = true
+      noRender = true
     })
 
     onActivated(() => {
-      noRender.value = false
+      noRender = false
     })
 
     // watch at the same time the component instance, the route record we are
@@ -133,7 +133,7 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
       // navigated to a different location so the value is different
       const currentName = props.name
 
-      if (!ViewComponent || !!noRender.value) {
+      if (!ViewComponent || !!noRender) {
         return normalizeSlot(slots.default, { Component: undefined, route })
       }
 

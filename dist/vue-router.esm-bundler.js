@@ -1,5 +1,5 @@
 /*!
-  * vue-router v4.0.142
+  * vue-router v4.0.145
   * (c) 2022 Eduardo San Martin Morote
   * @license MIT
   */
@@ -2260,12 +2260,12 @@ const RouterViewImpl = /*#__PURE__*/ defineComponent({
         provide(matchedRouteKey, matchedRouteRef);
         provide(routerViewLocationKey, routeToDisplay);
         const viewRef = ref();
-        const noRender = ref(false);
+        let noRender = false;
         onBeforeRouteLeave(() => {
-            noRender.value = true;
+            noRender = true;
         });
         onActivated(() => {
-            noRender.value = false;
+            noRender = false;
         });
         // watch at the same time the component instance, the route record we are
         // rendering, and the name
@@ -2306,7 +2306,7 @@ const RouterViewImpl = /*#__PURE__*/ defineComponent({
             // we need the value at the time we render because when we unmount, we
             // navigated to a different location so the value is different
             const currentName = props.name;
-            if (!ViewComponent || !!noRender.value) {
+            if (!ViewComponent || !!noRender) {
                 return normalizeSlot(slots.default, { Component: undefined, route });
             }
             // props from route configuration
