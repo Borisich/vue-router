@@ -14,6 +14,7 @@ import {
   watch,
   Slot,
   VNode,
+  onActivated,
 } from 'vue'
 import {
   RouteLocationNormalized,
@@ -28,6 +29,7 @@ import {
 import { assign, isBrowser } from './utils'
 import { warn } from './warning'
 import { isSameRouteRecord } from './location'
+import { onBeforeRouteLeave } from './navigationGuards'
 
 export interface RouterViewProps {
   name?: string
@@ -72,11 +74,11 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
 
     const viewRef = ref<ComponentPublicInstance>()
     const noRender = ref(false)
-    
+
     onBeforeRouteLeave(() => {
       noRender.value = true
     })
-    
+
     onActivated(() => {
       noRender.value = false
     })
