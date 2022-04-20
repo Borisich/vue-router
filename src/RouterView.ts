@@ -73,6 +73,8 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
     provide(routerViewLocationKey, routeToDisplay)
 
     const viewRef = ref<ComponentPublicInstance>()
+
+    let renderTrigger = ref(0)
     let noRender = false
 
     onBeforeRouteLeave(() => {
@@ -81,6 +83,7 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
 
     onActivated(() => {
       noRender = false
+      renderTrigger.value++
     })
 
     // watch at the same time the component instance, the route record we are
@@ -132,6 +135,10 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
       // we need the value at the time we render because when we unmount, we
       // navigated to a different location so the value is different
       const currentName = props.name
+
+      if (renderTrigger.value) {
+        // do nothing, just trigger render
+      }
 
       if (!ViewComponent || !!noRender) {
         return normalizeSlot(slots.default, { Component: undefined, route })
