@@ -1,10 +1,10 @@
-dist
 examples_dist
 node_modules
 coverage
 .nyc_output
 .rpt2_cache
 .env
+dist/src
 local.log
 .DS_Store
 e2e/reports

@@ -14,6 +14,7 @@ import {
   watch,
   Slot,
   VNode,
+  onActivated,
 } from 'vue'
 import {
   RouteLocationNormalized,
@@ -28,6 +29,7 @@ import {
 import { assign, isBrowser } from './utils'
 import { warn } from './warning'
 import { isSameRouteRecord } from './location'
+import { onBeforeRouteLeave } from './navigationGuards'
 
 export interface RouterViewProps {
   name?: string
@@ -71,6 +73,18 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
     provide(routerViewLocationKey, routeToDisplay)
 
     const viewRef = ref<ComponentPublicInstance>()
+
+    let renderTrigger = ref(0)
+    let noRender = false
+
+    onBeforeRouteLeave(() => {
+      noRender = true
+    })
+
+    onActivated(() => {
+      noRender = false
+      renderTrigger.value++
+    })
 
     // watch at the same time the component instance, the route record we are
     // rendering, and the name
@@ -122,8 +136,12 @@ export const RouterViewImpl = /*#__PURE__*/ defineComponent({
       // navigated to a different location so the value is different
       const currentName = props.name
 
-      if (!ViewComponent) {
-        return normalizeSlot(slots.default, { Component: ViewComponent, route })
+      if (renderTrigger.value) {
+        // do nothing, just trigger render
+      }
+
+      if (!ViewComponent || !!noRender) {
+        return normalizeSlot(slots.default, { Component: undefined, route })
       }
 
       // props from route configuration
