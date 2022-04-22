@@ -1,3 +1,13 @@
+## [4.0.148](https://github.com/vuejs/router/compare/v4.0.14...v4.0.148) (2022-04-22)
+
+### Bug Fixes
+
+- **matcher:** keep trailing slash on empty optional params ([2f1e9b9](https://github.com/vuejs/router/commit/2f1e9b976d7c5c1ada38c57f276304688d31b7e4)), closes [#1357](https://github.com/vuejs/router/issues/1357)
+- no dist ([c4b9b62](https://github.com/vuejs/router/commit/c4b9b623cb899d79fea8e3209332088b3434fb9b))
+- RouterView remounts ([b81296c](https://github.com/vuejs/router/commit/b81296c04d3c8d001b8cd58343cfe7b41d2589df))
+- setup history listeners once ([faa8562](https://github.com/vuejs/router/commit/faa85624d37367c638fb9272a4130d8524143120)), closes [#1344](https://github.com/vuejs/router/issues/1344)
+- **view:** handle @vue/compat automatically ([92becf6](https://github.com/vuejs/router/commit/92becf6dc6c4ef21985abb52887b4cec626f5c82)), closes [#1315](https://github.com/vuejs/router/issues/1315)
+
 ## [4.0.14](https://github.com/vuejs/router/compare/v4.0.13...v4.0.14) (2022-03-10)
 
 ### Features

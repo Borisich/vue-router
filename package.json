@@ -1,6 +1,6 @@
 {
-  "name": "vue-router",
-  "version": "4.0.147",
+  "name": "@borisich37/vue-router",
+  "version": "4.0.148",
   "main": "dist/vue-router.cjs.js",
   "unpkg": "dist/vue-router.global.js",
   "jsdelivr": "dist/vue-router.global.js",
@@ -24,6 +24,9 @@
     "vetur/attributes.json",
     "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite --config playground/vite.config.js",
     "release": "bash scripts/release.sh",
